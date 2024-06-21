@@ -32,7 +32,7 @@ final class RemoveAttrRector extends AbstractRector implements ConfigurableRecto
 
     public function configure(array $configuration): void
     {
-        $this->attrs = $configuration;
+        $this->attrs = array_merge($this->attrs, $configuration);
     }
 
     public function getRuleDefinition(): RuleDefinition
