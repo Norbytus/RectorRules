@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace Utils\Rector\Rector;
 
 use PhpParser\Node;
+use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\ClassLike;
+use PhpParser\Node\Stmt\ClassMethod;
+use PhpParser\Node\Stmt\Property;
 use Rector\Contract\Rector\ConfigurableRectorInterface;
 use Rector\Php80\NodeAnalyzer\PhpAttributeAnalyzer;
 use Rector\PhpAttribute\NodeFactory\PhpAttributeGroupFactory;
@@ -57,11 +61,11 @@ CODE_SAMPLE
     public function getNodeTypes(): array
     {
         // @todo select node type
-        return [Class_::class];
+        return [ClassLike::class, Param::class, Property::class, ClassMethod::class];
     }
 
     /**
-     * @param Class_ $node
+     * @param ClassLike|Param|Property|ClassMethod $node
      */
     public function refactor(Node $node): ?Node
     {
